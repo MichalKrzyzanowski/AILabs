@@ -1,0 +1,12 @@
+﻿  Player.cpp
+C:\Users\gameuser\Desktop\AILab1+2\AILab1+2\Utility.h(21,11): warning C4244: '=': conversion from 'unsigned int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\gameuser\Desktop\AILab1+2\AILab1+2\Utility.h(27,11): warning C4244: '=': conversion from 'unsigned int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+  AILab1+2.vcxproj -> C:\Users\gameuser\Desktop\AILab1+2\Debug\AILab1+2.exe
