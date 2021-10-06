@@ -1,18 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project>
-  <ProjectOutputs>
-    <ProjectOutput>
-      <FullPath>C:\Users\gameuser\Desktop\AILab1+2\Debug\AILab1+2.exe</FullPath>
-    </ProjectOutput>
-  </ProjectOutputs>
-  <ContentFiles>
-    <ContentFile>
-      <FullPath>C:\Users\gameuser\Desktop\AILab1+2\AILab1+2\ASSETS\FONTS\ariblk.ttf</FullPath>
-    </ContentFile>
-    <ContentFile>
-      <FullPath>C:\Users\gameuser\Desktop\AILab1+2\AILab1+2\ASSETS\IMAGES\SFML-LOGO.png</FullPath>
-    </ContentFile>
-  </ContentFiles>
-  <SatelliteDlls />
-  <NonRecipeFileRefs />
+  <ProjectOutputs>C:\Users\Micha\Desktop\AILabs\Debug\AILab1+2.exe</ProjectOutputs>
+  <ContentFiles>C:\Users\Micha\Desktop\AILabs\AILab1+2\ASSETS\FONTS\ariblk.ttf</ContentFiles>
+  <SatelliteDlls></SatelliteDlls>
+  <NonRecipeFileRefs></NonRecipeFileRefs>
 </Project>

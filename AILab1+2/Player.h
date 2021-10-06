@@ -8,6 +8,8 @@ class Player
 {
 
 private:
+	const float m_SPEED_LIMIT{ 5.0f };
+
 	sf::Vector2f m_position;
 	float m_speed;
 	sf::Vector2f m_velocity;
@@ -24,5 +26,8 @@ public:
 	void handleEvents(sf::Event e);
 	void update(sf::Time dt);
 	void render(sf::RenderWindow& window);
+
+	void rotate();
+	sf::Vector2f normalized(sf::Vector2f vec);
 };
 

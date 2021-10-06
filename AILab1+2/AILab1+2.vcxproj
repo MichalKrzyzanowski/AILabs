@@ -33,12 +33,6 @@
     <ClInclude Include="Utility.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="ASSETS\IMAGES\SFML-LOGO.png">
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</DeploymentContent>
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</DeploymentContent>
-    </Image>
-  </ItemGroup>
-  <ItemGroup>
     <Font Include="ASSETS\FONTS\ariblk.ttf">
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</DeploymentContent>
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</DeploymentContent>
