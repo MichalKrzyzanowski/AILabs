@@ -71,10 +71,8 @@ void Game::processEvents()
 		{
 			m_exitGame = true;
 		}
-		if (sf::Event::KeyPressed == newEvent.type) //user pressed a key
-		{
-			processKeys(newEvent);
-		}
+		
+		processKeys(newEvent);
 	}
 }
 

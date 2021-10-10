@@ -1,6 +1,6 @@
 #include "Player.h"
 
-Player::Player(const sf::Vector2f& pos, const sf::Vector2f& dir)
+Player::Player(const MyVector3& pos, const MyVector3& dir)
 {
 	if (!m_texture.loadFromFile("ASSETS\\IMAGES\\ship.png"))
 	{
@@ -9,8 +9,9 @@ Player::Player(const sf::Vector2f& pos, const sf::Vector2f& dir)
 	}
 
 	m_position = pos;
-	m_velocity = sf::Vector2f{ 0, 0 };
-	m_speed = 1.0f;
+	m_velocity = MyVector3{ 0, 0, 0 };
+	m_orientation = m_sprite.getRotation();
+	m_speed = 0.0f;
 	m_rotation = 0.0f;
 	m_directionNormalized = dir;
 	m_directionNormalized = normalized(m_directionNormalized);
@@ -27,43 +28,72 @@ Player::Player(const sf::Vector2f& pos, const sf::Vector2f& dir)
 	m_sprite.setPosition(m_position);
 
 	m_sprite.setOrigin(m_sprite.getGlobalBounds().width / 2.0f, m_sprite.getGlobalBounds().height / 2.0f);
+	m_sprite.setScale(0.5f, 0.5f);
 }
 
 void Player::handleEvents(sf::Event e)
 {
-	if (sf::Keyboard::Up == e.key.code || sf::Keyboard::W == e.key.code)
+	if (e.type == sf::Event::KeyPressed)
 	{
-		m_speed += 0.5;
+		if (sf::Keyboard::W == e.key.code)
+		{
+			m_isStopping = false;
+		}
 
-		if (m_speed >= m_SPEED_LIMIT) m_speed = m_SPEED_LIMIT;
+		if (sf::Keyboard::A == e.key.code)
+		{
+			m_rotation = -5.5f;
+		}
 
+		else if (sf::Keyboard::D == e.key.code)
+		{
+			m_rotation = 5.5f;
+		}
 	}
 
-	if (sf::Keyboard::Down == e.key.code || sf::Keyboard::S == e.key.code)
+	else if (e.type == sf::Event::KeyReleased)
 	{
-		m_speed -= 0.5;
+		if (sf::Keyboard::A == e.key.code)
+		{
+			m_rotation = 0.0f;
+		}
 
-		if (m_speed <= -m_SPEED_LIMIT) m_speed = -m_SPEED_LIMIT;
-	}
+		else if (sf::Keyboard::D == e.key.code)
+		{
+			m_rotation = 0.0f;
+		}
 
-	if (sf::Keyboard::Left == e.key.code || sf::Keyboard::A == e.key.code)
-	{
-		m_sprite.setRotation(m_sprite.getRotation() - 5.0f);
-	}
-
-	if (sf::Keyboard::Right == e.key.code || sf::Keyboard::D == e.key.code)
-	{
-		m_sprite.setRotation(m_sprite.getRotation() + 5.0f);
+		if (sf::Keyboard::W == e.key.code)
+		{
+			m_isStopping = true;
+		}
 	}
 }
 
 void Player::update(sf::Time dt)
 {
-	//m_velocity = m_directionNormalized * m_speed;
-	m_velocity.x = (cosf(m_sprite.getRotation() / 180 * PI) * m_speed);
-	m_velocity.y = (sinf(m_sprite.getRotation() / 180 * PI) * m_speed);
+	if (!m_isStopping)
+	{
+		applyThrust();
+	}
+	else
+	{
+		slowDown();
+	}
 
-	m_position += m_velocity;
+	std::cout << "Length: " << m_velocity.length() << "\n";
+	m_orientation = m_orientation + m_rotation;
+	m_sprite.setRotation(m_orientation);
+
+	m_acceleration.x = (cosf(m_orientation / 180.0 * PI));
+	m_acceleration.y = (sinf(m_orientation / 180.0 * PI));
+	m_acceleration.normalise();
+	m_acceleration = m_acceleration * m_speed;
+
+	m_velocity += m_acceleration;
+
+	m_position = m_position + m_velocity;
+
 	m_sprite.setPosition(m_position);
 
 	wrapAround(m_position, m_sprite);
@@ -74,9 +104,45 @@ void Player::render(sf::RenderWindow& window)
 	window.draw(m_sprite);
 }
 
+void Player::applyThrust()
+{
+	m_speed = 0.2f;
+
+	if (m_velocity.length() > 5.0f)
+	{
+		m_velocity.normalise();
+		m_velocity = m_velocity * 5.0f;
+	}
+}
+
+void Player::slowDown()
+{
+	if (m_velocity.length() <= 0.1f)
+	{
+		m_velocity.normalise();
+		m_velocity = m_velocity * 0.0f;
+		m_speed = 0.0f;
+	}
+	else
+	{
+		m_speed = -0.01f;
+	}
+}
+
+float Player::getOrientation(float currentOrientation, MyVector3& velocity)
+{
+	if (velocity.length() > 0.0f)
+	{
+		float radians = atan2f(-m_position.x, m_position.y);
+		return radians * (180.0f / PI);
+	}
+
+	return currentOrientation;
+}
+
 void Player::rotate()
 {
-	float rotationInRads = m_rotation * (PI / 180);
+	float rotationInRads = m_rotation * (180.0f / PI);
 
 	m_directionNormalized.x = m_directionNormalized.x * cosf(rotationInRads) - m_directionNormalized.y * sinf(rotationInRads);
 	m_directionNormalized.y = m_directionNormalized.x * sinf(rotationInRads) + m_directionNormalized.y * cosf(rotationInRads);
@@ -85,7 +151,7 @@ void Player::rotate()
 	m_sprite.setRotation(m_rotation);
 }
 
-sf::Vector2f Player::normalized(sf::Vector2f vec)
+MyVector3 Player::normalized(MyVector3 vec)
 {
 	float vecLen = (vec.x * vec.x) + (vec.y * vec.y);
 	vecLen = sqrtf(vecLen);
@@ -95,5 +161,5 @@ sf::Vector2f Player::normalized(sf::Vector2f vec)
 		return vec / vecLen;
 	}
 
-	return sf::Vector2f{ 0, 0 };
+	return MyVector3{ 0, 0, 0 };
 }

@@ -3,12 +3,10 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "Globals.h"
+#include "MyVector3.h"
 
-inline void wrapAround(sf::Vector2f& pos, const sf::Sprite& obj)
-{
-	//std::cout << pos.x << " " << pos.y << "\n";
-	
-	std::cout << pos.y << " " << SCREEN_WIDTH << "\n";
+inline void wrapAround(MyVector3& pos, const sf::Sprite& obj)
+{	
 	// right border
 	if (pos.x > SCREEN_WIDTH)
 	{

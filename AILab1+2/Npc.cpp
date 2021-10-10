@@ -30,7 +30,7 @@ void Npc::update(sf::Time dt)
 	m_position = m_position + (m_directionNormalized * m_velocity);
 	m_sprite.setPosition(m_position);
 
-	wrapAround(m_position, m_sprite);
+	//wrapAround(m_position, m_sprite);
 	
 }
 
