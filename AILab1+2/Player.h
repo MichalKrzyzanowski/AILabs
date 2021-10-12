@@ -9,22 +9,21 @@ class Player
 {
 
 private:
-	const float m_SPEED_LIMIT{ 5.0f };
+	const double m_MAX_SPEED{ 500.0 };
+	const double m_MIN_SPEED{ 5.0 };
+	const double m_SPEED_INC{ 2.0 };
 
 	MyVector3 m_position;
-	MyVector3 m_acceleration{};
-	float m_speed;
+	double m_speed;
+	double m_angleInDegrees{ 70.0 };
 
 	MyVector3 m_velocity;
-	MyVector3 m_directionNormalized;
 
 	sf::Texture m_texture;
 	sf::Sprite m_sprite;
 
-	float m_orientation;
-	float m_rotation;
-
-	bool m_isStopping{ true };
+	double m_orientation;
+	double m_rotation;
 
 public:
 	Player(const MyVector3& pos, const MyVector3& dir);
@@ -35,9 +34,7 @@ public:
 
 	void applyThrust();
 	void slowDown();
-	float getOrientation(float currentOrientation, MyVector3& velocity);
-
-	void rotate();
-	MyVector3 normalized(MyVector3 vec);
+	void rotateLeft(double dt);
+	void rotateRight(double dt);
 };
 

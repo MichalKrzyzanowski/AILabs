@@ -31,3 +31,13 @@ inline void wrapAround(MyVector3& pos, const sf::Sprite& obj)
 		pos.y = -obj.getGlobalBounds().height;
 	}
 }
+
+inline float DegToRadConvert(float deg)
+{
+	return deg * (PI / 180.0f);
+}
+
+inline float RadToDegConvert(float rad)
+{
+	return rad * (180.0f / PI);
+}

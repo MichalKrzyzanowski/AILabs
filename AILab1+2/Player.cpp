@@ -9,90 +9,36 @@ Player::Player(const MyVector3& pos, const MyVector3& dir)
 	}
 
 	m_position = pos;
-	m_velocity = MyVector3{ 0, 0, 0 };
-	m_orientation = m_sprite.getRotation();
-	m_speed = 0.0f;
-	m_rotation = 0.0f;
-	m_directionNormalized = dir;
-	m_directionNormalized = normalized(m_directionNormalized);
-	// normalizing the direction
-	/*float dirLen = (m_directionNormalized.x * m_directionNormalized.x) + (m_directionNormalized.y * m_directionNormalized.y);
-	dirLen = sqrtf(dirLen);
-
-	if (dirLen != 0.0f)
-	{
-		m_directionNormalized = m_directionNormalized / dirLen;
-	}*/
+	m_velocity = MyVector3{};
+	m_orientation = 0.0;
+	m_speed = 10.0;
+	m_rotation = DegToRadConvert(m_angleInDegrees);
+	rotateRight(0.0); // get the ship moving
 
 	m_sprite.setTexture(m_texture);
 	m_sprite.setPosition(m_position);
 
-	m_sprite.setOrigin(m_sprite.getGlobalBounds().width / 2.0f, m_sprite.getGlobalBounds().height / 2.0f);
-	m_sprite.setScale(0.5f, 0.5f);
+	m_sprite.setOrigin(m_sprite.getGlobalBounds().width / 2.0, m_sprite.getGlobalBounds().height / 2.0);
+	m_sprite.setScale(0.5, 0.5);
 }
 
 void Player::handleEvents(sf::Event e)
 {
-	if (e.type == sf::Event::KeyPressed)
-	{
-		if (sf::Keyboard::W == e.key.code)
-		{
-			m_isStopping = false;
-		}
-
-		if (sf::Keyboard::A == e.key.code)
-		{
-			m_rotation = -5.5f;
-		}
-
-		else if (sf::Keyboard::D == e.key.code)
-		{
-			m_rotation = 5.5f;
-		}
-	}
-
-	else if (e.type == sf::Event::KeyReleased)
-	{
-		if (sf::Keyboard::A == e.key.code)
-		{
-			m_rotation = 0.0f;
-		}
-
-		else if (sf::Keyboard::D == e.key.code)
-		{
-			m_rotation = 0.0f;
-		}
-
-		if (sf::Keyboard::W == e.key.code)
-		{
-			m_isStopping = true;
-		}
-	}
 }
 
 void Player::update(sf::Time dt)
 {
-	if (!m_isStopping)
-	{
-		applyThrust();
-	}
-	else
-	{
-		slowDown();
-	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) { applyThrust(); }
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) { slowDown(); }
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) { rotateLeft(dt.asSeconds()); }
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) { rotateRight(dt.asSeconds()); }
+
+
 
 	std::cout << "Length: " << m_velocity.length() << "\n";
-	m_orientation = m_orientation + m_rotation;
-	m_sprite.setRotation(m_orientation);
 
-	m_acceleration.x = (cosf(m_orientation / 180.0 * PI));
-	m_acceleration.y = (sinf(m_orientation / 180.0 * PI));
-	m_acceleration.normalise();
-	m_acceleration = m_acceleration * m_speed;
-
-	m_velocity += m_acceleration;
-
-	m_position = m_position + m_velocity;
+	m_position = m_position + m_velocity * dt.asSeconds();
 
 	m_sprite.setPosition(m_position);
 
@@ -106,60 +52,40 @@ void Player::render(sf::RenderWindow& window)
 
 void Player::applyThrust()
 {
-	m_speed = 0.2f;
+	m_speed += m_SPEED_INC;
 
-	if (m_velocity.length() > 5.0f)
+	if (m_speed > m_MAX_SPEED)
 	{
-		m_velocity.normalise();
-		m_velocity = m_velocity * 5.0f;
+		m_speed = m_MAX_SPEED;
 	}
+	m_velocity.normalise();
+	m_velocity = m_velocity * m_speed;
 }
 
 void Player::slowDown()
 {
-	if (m_velocity.length() <= 0.1f)
+	m_speed -= m_SPEED_INC;
+
+	if (m_speed < m_MIN_SPEED)
 	{
-		m_velocity.normalise();
-		m_velocity = m_velocity * 0.0f;
-		m_speed = 0.0f;
+		m_speed = m_MIN_SPEED;
 	}
-	else
-	{
-		m_speed = -0.01f;
-	}
+	m_velocity.normalise();
+	m_velocity = m_velocity * m_speed;
 }
 
-float Player::getOrientation(float currentOrientation, MyVector3& velocity)
+void Player::rotateRight(double dt)
 {
-	if (velocity.length() > 0.0f)
-	{
-		float radians = atan2f(-m_position.x, m_position.y);
-		return radians * (180.0f / PI);
-	}
+	m_orientation += m_rotation * dt;
+	m_velocity = MyVector3{ cosf(m_orientation), sinf(m_orientation), 0.0 } * m_speed;
 
-	return currentOrientation;
+	m_sprite.setRotation(RadToDegConvert(atan2f(m_velocity.y, m_velocity.x)));
 }
 
-void Player::rotate()
+void Player::rotateLeft(double dt)
 {
-	float rotationInRads = m_rotation * (180.0f / PI);
+	m_orientation -= m_rotation * dt;
+	m_velocity = MyVector3{ cosf(m_orientation), sinf(m_orientation), 0.0 } * m_speed;
 
-	m_directionNormalized.x = m_directionNormalized.x * cosf(rotationInRads) - m_directionNormalized.y * sinf(rotationInRads);
-	m_directionNormalized.y = m_directionNormalized.x * sinf(rotationInRads) + m_directionNormalized.y * cosf(rotationInRads);
-	m_directionNormalized = normalized(m_directionNormalized);
-
-	m_sprite.setRotation(m_rotation);
-}
-
-MyVector3 Player::normalized(MyVector3 vec)
-{
-	float vecLen = (vec.x * vec.x) + (vec.y * vec.y);
-	vecLen = sqrtf(vecLen);
-
-	if (vecLen != 0.0f)
-	{
-		return vec / vecLen;
-	}
-
-	return MyVector3{ 0, 0, 0 };
+	m_sprite.setRotation(RadToDegConvert(atan2f(m_velocity.y, m_velocity.x)));
 }

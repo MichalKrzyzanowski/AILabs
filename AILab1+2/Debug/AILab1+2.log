@@ -1,9 +1,22 @@
-﻿  Player.cpp
-C:\Users\Micha\Desktop\AILabs\AILab1+2\Player.cpp(88,49): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\Micha\Desktop\AILabs\AILab1+2\Player.cpp(89,49): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\Micha\Desktop\AILabs\AILab1+2\Player.cpp(136,51): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\Micha\Desktop\AILabs\AILab1+2\Player.cpp(136,26): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\Micha\Desktop\AILabs\AILab1+2\Player.cpp(137,18): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
-C:\Users\Micha\Desktop\AILabs\AILab1+2\Player.cpp(145,23): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Micha\Desktop\AILabs\AILab1+2\Player.cpp(156,15): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+﻿  Game.cpp
+C:\Users\Micha\Desktop\AILabs\AILab1+2\Utility.h(37,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+C:\Users\Micha\Desktop\AILabs\AILab1+2\Utility.h(42,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+  Player.cpp
+C:\Users\Micha\Desktop\AILabs\AILab1+2\Utility.h(37,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+C:\Users\Micha\Desktop\AILabs\AILab1+2\Utility.h(42,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+C:\Users\Micha\Desktop\AILabs\AILab1+2\Player.cpp(15,31): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Micha\Desktop\AILabs\AILab1+2\Player.cpp(21,95): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Micha\Desktop\AILabs\AILab1+2\Player.cpp(21,54): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Micha\Desktop\AILabs\AILab1+2\Player.cpp(80,31): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Micha\Desktop\AILabs\AILab1+2\Player.cpp(80,52): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Micha\Desktop\AILabs\AILab1+2\Player.cpp(82,70): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Micha\Desktop\AILabs\AILab1+2\Player.cpp(82,56): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Micha\Desktop\AILabs\AILab1+2\Player.cpp(88,31): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Micha\Desktop\AILabs\AILab1+2\Player.cpp(88,52): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Micha\Desktop\AILabs\AILab1+2\Player.cpp(90,70): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Micha\Desktop\AILabs\AILab1+2\Player.cpp(90,56): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  main.cpp
+C:\Users\Micha\Desktop\AILabs\AILab1+2\Utility.h(37,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+C:\Users\Micha\Desktop\AILabs\AILab1+2\Utility.h(42,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+  Generating Code...
   AILab1+2.vcxproj -> C:\Users\Micha\Desktop\AILabs\Debug\AILab1+2.exe
