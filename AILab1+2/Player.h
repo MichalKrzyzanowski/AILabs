@@ -26,7 +26,7 @@ private:
 	double m_rotation;
 
 public:
-	Player(const MyVector3& pos, const MyVector3& dir);
+	Player(const MyVector3& pos);
 
 	void handleEvents(sf::Event e);
 	void update(sf::Time dt);
@@ -36,5 +36,9 @@ public:
 	void slowDown();
 	void rotateLeft(double dt);
 	void rotateRight(double dt);
+
+	MyVector3 velocity() { return m_velocity; }
+	MyVector3 position() { return m_position; }
+	double orientation() { return m_orientation; }
 };
 

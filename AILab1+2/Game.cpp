@@ -16,10 +16,12 @@
 /// </summary>
 Game::Game() :
 	m_window{ sf::VideoMode{ SCREEN_WIDTH, SCREEN_HEIGTH, 32U }, "SFML Game" },
-	m_ship{ sf::Vector2f{300, 100}, sf::Vector2f{0, -1} },
-	m_moon{ sf::Vector2f{100, 100}, sf::Vector2f{-5, 0} },
+	m_ship{ sf::Vector2f{300, 100} },
+	m_seekShip{ sf::Vector2f{300, 300}, "seekShip", "Seek", &m_ship },
 	m_exitGame{ false } //when true game will exit
 {
+	m_font.loadFromFile("ASSETS\\FONTS\\ariblk.ttf");
+	m_seekShip.setFont(m_font);
 }
 
 /// <summary>
@@ -103,7 +105,7 @@ void Game::update(sf::Time t_deltaTime)
 	}
 
 	m_ship.update(t_deltaTime);
-	m_moon.update(t_deltaTime);
+	m_seekShip.update(t_deltaTime);
 }
 
 /// <summary>
@@ -113,6 +115,6 @@ void Game::render()
 {
 	m_window.clear(sf::Color::White);
 	m_ship.render(m_window);
-	m_moon.render(m_window);
+	m_seekShip.render(m_window);
 	m_window.display();
 }

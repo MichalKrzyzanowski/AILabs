@@ -1,6 +1,6 @@
 #include "Player.h"
 
-Player::Player(const MyVector3& pos, const MyVector3& dir)
+Player::Player(const MyVector3& pos)
 {
 	if (!m_texture.loadFromFile("ASSETS\\IMAGES\\ship.png"))
 	{

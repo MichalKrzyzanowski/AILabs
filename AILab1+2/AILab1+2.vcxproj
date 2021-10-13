@@ -32,6 +32,7 @@
     <ClInclude Include="MyVector3.h" />
     <ClInclude Include="Npc.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Seek.h" />
     <ClInclude Include="Utility.h" />
   </ItemGroup>
   <ItemGroup>
