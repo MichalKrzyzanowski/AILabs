@@ -40,7 +40,7 @@ private:
 	Npc m_seekShip;
 	Npc m_wanderShip;
 	//Npc m_slowArriveShip;
-	//Npc m_fastArriveShip;
+	Npc m_fastArriveShip;
 	//Npc m_pursueShip;
 	
 

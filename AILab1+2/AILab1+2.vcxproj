@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Arrive.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="main.cpp" />
@@ -29,6 +30,7 @@
     <ClCompile Include="Wander.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Arrive.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="MyVector3.h" />

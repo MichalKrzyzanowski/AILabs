@@ -19,13 +19,16 @@ Game::Game() :
 	m_ship{ sf::Vector2f{300, 100} },
 	m_seekShip{ sf::Vector2f{300, 300}, "seekShip", "Seek", &m_ship },
 	m_wanderShip{ sf::Vector2f{400, 400}, "wanderShip", "Wander", &m_ship },
+	m_fastArriveShip{ sf::Vector2f{400, 400}, "fastArriveShip", "ArriveFast", &m_ship },
 	m_exitGame{ false } //when true game will exit
 {
 	m_font.loadFromFile("ASSETS\\FONTS\\ariblk.ttf");
 	m_seekShip.setFont(m_font);
 	m_wanderShip.setFont(m_font);
+	m_fastArriveShip.setFont(m_font);
 	m_seekShip.setBehaviour(AIStates::SEEK);
 	m_wanderShip.setBehaviour(AIStates::WANDER);
+	m_fastArriveShip.setBehaviour(AIStates::ARRIVE);
 }
 
 /// <summary>
@@ -77,7 +80,6 @@ void Game::processEvents()
 		{
 			m_exitGame = true;
 		}
-		
 		processKeys(newEvent);
 	}
 }
@@ -97,6 +99,7 @@ void Game::processKeys(sf::Event t_event)
 	m_ship.handleEvents(t_event);
 	m_seekShip.handleEvents(t_event);
 	m_wanderShip.handleEvents(t_event);
+	m_fastArriveShip.handleEvents(t_event);
 }
 
 /// <summary>
@@ -113,6 +116,7 @@ void Game::update(sf::Time t_deltaTime)
 	m_ship.update(t_deltaTime);
 	m_seekShip.update(t_deltaTime);
 	m_wanderShip.update(t_deltaTime);
+	m_fastArriveShip.update(t_deltaTime);
 }
 
 /// <summary>
@@ -124,5 +128,6 @@ void Game::render()
 	m_ship.render(m_window);
 	m_seekShip.render(m_window);
 	m_wanderShip.render(m_window);
+	m_fastArriveShip.render(m_window);
 	m_window.display();
 }

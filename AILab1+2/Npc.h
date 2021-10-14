@@ -7,6 +7,7 @@
 #include "Utility.h"
 #include "Seek.h"
 #include "Wander.h"
+#include "Arrive.h"
 #include "Player.h"
 
 enum class AIStates
@@ -21,15 +22,14 @@ enum class AIStates
 class Npc
 {
 private:
-	const double m_MAX_SPEED{ 50.0 };
-	const double m_MIN_SPEED{ 5.0 };
-	const double m_SPEED_INC{ 2.0 };
+	const double m_MAX_SPEED;
+	const double m_MIN_SPEED;
 
 	MyVector3 m_position;
-	double m_speed{ 10.0 };
+	double m_speed{ m_MIN_SPEED };
 	double m_angleInDegrees{ 70.0 };
 
-	MyVector3 m_velocity;
+	MyVector3 m_velocity{};
 
 	sf::Texture m_texture;
 	sf::Sprite m_sprite;
@@ -38,17 +38,23 @@ private:
 	bool m_isDisplayed{ true };
 	bool m_fontSet{ false };
 
-	double m_orientation;
+	double m_orientation{};
 	double m_rotation;
 	Seek m_seek;
 	Wander m_wander;
+	Arrive m_arrive;
 	AIStates m_currentState{ AIStates::NONE };
 
 	Player* m_target;
 
 public:
-	Npc(const sf::Vector2f& pos, const std::string& filename, const std::string& name, Player* target);
-	
+	Npc(const sf::Vector2f& pos,
+		const std::string& filename,
+		const std::string& name,
+		Player* target,
+		double maxSpeed = 50.0,
+		double minSpeed = 10.0);
+
 	void handleEvents(sf::Event e);
 	void update(sf::Time dt);
 	void render(sf::RenderWindow& window);
@@ -67,6 +73,7 @@ public:
 
 	// setters
 	void setVelocity(MyVector3 vel) { m_velocity = vel; }
+	void setSpeed(double speed) { m_speed = speed; }
 	void setBehaviour(AIStates behaviour) { m_currentState = behaviour; }
 };
 

@@ -1,8 +1,16 @@
 #include "Npc.h"
 
-Npc::Npc(const sf::Vector2f& pos, const std::string& filename, const std::string& name, Player* target) :
+Npc::Npc(const sf::Vector2f& pos,
+	const std::string& filename,
+	const std::string& name,
+	Player* target,
+	double maxSpeed,
+	double minSpeed) :
+	m_MAX_SPEED{ maxSpeed },
+	m_MIN_SPEED{ minSpeed },
 	m_seek{ this },
-	m_wander{ this }
+	m_wander{ this },
+	m_arrive{ this }
 {
 	if (!m_texture.loadFromFile("ASSETS\\IMAGES\\" + filename + ".png"))
 	{
@@ -13,8 +21,6 @@ Npc::Npc(const sf::Vector2f& pos, const std::string& filename, const std::string
 	m_target = target;
 
 	m_position = pos;
-	m_velocity = MyVector3{};
-	m_orientation = 0.0;
 	m_rotation = DegToRadConvert(m_angleInDegrees);
 
 	m_orientation = m_target->orientation();
@@ -46,6 +52,12 @@ void Npc::handleEvents(sf::Event e)
 	{
 		toggleDisplay();
 	}
+
+	// fast arrive
+	if (e.type == sf::Event::KeyPressed && e.key.code == sf::Keyboard::Num3 && m_nameText.getString() == "ArriveFast")
+	{
+		toggleDisplay();
+	}
 }
 
 void Npc::update(sf::Time dt)
@@ -60,6 +72,11 @@ void Npc::update(sf::Time dt)
 		else if (m_currentState == AIStates::WANDER)
 		{
 			m_wander.update(dt);
+		}
+
+		else if(m_currentState == AIStates::ARRIVE)
+		{
+			m_arrive.update(dt);
 		}
 
 		m_sprite.setRotation(RadToDegConvert(atan2f(m_velocity.y, m_velocity.x)));
