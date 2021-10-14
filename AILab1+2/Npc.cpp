@@ -1,6 +1,8 @@
 #include "Npc.h"
 
-Npc::Npc(const sf::Vector2f& pos, const std::string& filename, const std::string& name, Player* target) : m_seek{ this }
+Npc::Npc(const sf::Vector2f& pos, const std::string& filename, const std::string& name, Player* target) :
+	m_seek{ this },
+	m_wander{ this }
 {
 	if (!m_texture.loadFromFile("ASSETS\\IMAGES\\" + filename + ".png"))
 	{
@@ -22,7 +24,7 @@ Npc::Npc(const sf::Vector2f& pos, const std::string& filename, const std::string
 	m_sprite.setPosition(m_position);
 
 	m_sprite.setOrigin(m_sprite.getGlobalBounds().width / 2.0, m_sprite.getGlobalBounds().height / 2.0);
-	m_sprite.setScale(0.5, 0.5);
+	m_sprite.setScale(0.3, 0.3);
 
 	m_nameText.setCharacterSize(24u);
 	m_nameText.setString(name);
@@ -33,7 +35,14 @@ Npc::Npc(const sf::Vector2f& pos, const std::string& filename, const std::string
 
 void Npc::handleEvents(sf::Event e)
 {
-	if (e.type == sf::Event::KeyPressed && e.key.code == sf::Keyboard::Num1)
+	// seek
+	if (e.type == sf::Event::KeyPressed && e.key.code == sf::Keyboard::Num1 && m_nameText.getString() == "Seek")
+	{
+		toggleDisplay();
+	}
+
+	// wander
+	if (e.type == sf::Event::KeyPressed && e.key.code == sf::Keyboard::Num2 && m_nameText.getString() == "Wander")
 	{
 		toggleDisplay();
 	}
@@ -47,7 +56,12 @@ void Npc::update(sf::Time dt)
 		{
 			m_seek.update(dt);
 		}
-		std::cout << "Length: " << m_velocity.length() << "\n";
+
+		else if (m_currentState == AIStates::WANDER)
+		{
+			m_wander.update(dt);
+		}
+
 		m_sprite.setRotation(RadToDegConvert(atan2f(m_velocity.y, m_velocity.x)));
 
 		m_position = m_position + m_velocity * dt.asSeconds();

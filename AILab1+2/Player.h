@@ -10,7 +10,7 @@ class Player
 {
 
 private:
-	const double m_MAX_SPEED{ 500.0 };
+	const double m_MAX_SPEED{ 100.0 };
 	const double m_MIN_SPEED{ 5.0 };
 	const double m_SPEED_INC{ 2.0 };
 

@@ -16,6 +16,5 @@ public:
 	void update(sf::Time dt);
 };
 
-
 #include "Npc.h"
 #endif // !SEEK_H

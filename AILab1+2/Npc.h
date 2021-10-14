@@ -6,6 +6,7 @@
 #include "Globals.h"
 #include "Utility.h"
 #include "Seek.h"
+#include "Wander.h"
 #include "Player.h"
 
 enum class AIStates
@@ -20,12 +21,12 @@ enum class AIStates
 class Npc
 {
 private:
-	const double m_MAX_SPEED{ 250.0 };
+	const double m_MAX_SPEED{ 50.0 };
 	const double m_MIN_SPEED{ 5.0 };
 	const double m_SPEED_INC{ 2.0 };
 
 	MyVector3 m_position;
-	double m_speed{ 20.0 };
+	double m_speed{ 10.0 };
 	double m_angleInDegrees{ 70.0 };
 
 	MyVector3 m_velocity;
@@ -40,7 +41,8 @@ private:
 	double m_orientation;
 	double m_rotation;
 	Seek m_seek;
-	AIStates m_currentState{ AIStates::SEEK };
+	Wander m_wander;
+	AIStates m_currentState{ AIStates::NONE };
 
 	Player* m_target;
 
@@ -65,6 +67,7 @@ public:
 
 	// setters
 	void setVelocity(MyVector3 vel) { m_velocity = vel; }
+	void setBehaviour(AIStates behaviour) { m_currentState = behaviour; }
 };
 
 #endif // !NPC_H
