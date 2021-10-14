@@ -34,10 +34,6 @@ void Player::update(sf::Time dt)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) { rotateLeft(dt.asSeconds()); }
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) { rotateRight(dt.asSeconds()); }
 
-
-
-	std::cout << "Length: " << m_velocity.length() << "\n";
-
 	m_position = m_position + m_velocity * dt.asSeconds();
 
 	m_sprite.setPosition(m_position);

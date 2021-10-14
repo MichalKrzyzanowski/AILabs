@@ -3,15 +3,19 @@
 
 #include "MyVector3.h"
 
-static class Seek
-{
-public:
-	static void seek(MyVector3& targetPos, double targetOrientation)
-	{
+class Npc;
 
-	}
+class Seek
+{
+private:
+	Npc* m_npc;
+
+public:
+	Seek(Npc* npc);
+
+	void update(sf::Time dt);
 };
 
 
-
+#include "Npc.h"
 #endif // !SEEK_H

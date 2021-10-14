@@ -1,4 +1,5 @@
-#pragma once
+#ifndef PLAYER_H
+#define PLAYER_H
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
@@ -42,3 +43,4 @@ public:
 	double orientation() { return m_orientation; }
 };
 
+#endif // !PLAYER_H

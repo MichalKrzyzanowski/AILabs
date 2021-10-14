@@ -1,4 +1,5 @@
-#pragma once
+#ifndef NPC_H
+#define NPC_H
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
@@ -24,7 +25,7 @@ private:
 	const double m_SPEED_INC{ 2.0 };
 
 	MyVector3 m_position;
-	double m_speed;
+	double m_speed{ 20.0 };
 	double m_angleInDegrees{ 70.0 };
 
 	MyVector3 m_velocity;
@@ -38,8 +39,9 @@ private:
 
 	double m_orientation;
 	double m_rotation;
+	Seek m_seek;
+	AIStates m_currentState{ AIStates::SEEK };
 
-	AIStates m_currentState{ AIStates::NONE };
 	Player* m_target;
 
 public:
@@ -51,5 +53,18 @@ public:
 
 	void toggleDisplay();
 	void setFont(const sf::Font& font);
+
+	// getters
+	double speed() { return m_speed; }
+	double maxSpeed() { return m_MAX_SPEED; }
+	double minSpeed() { return m_MIN_SPEED; }
+	MyVector3& velocity() { return m_velocity; }
+	MyVector3 position() { return m_position; }
+	double orientation() { return m_orientation; }
+	Player* target() { return m_target; }
+
+	// setters
+	void setVelocity(MyVector3 vel) { m_velocity = vel; }
 };
 
+#endif // !NPC_H

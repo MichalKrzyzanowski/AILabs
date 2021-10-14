@@ -1,6 +1,6 @@
 #include "Npc.h"
 
-Npc::Npc(const sf::Vector2f& pos, const std::string& filename, const std::string& name, Player* target)
+Npc::Npc(const sf::Vector2f& pos, const std::string& filename, const std::string& name, Player* target) : m_seek{ this }
 {
 	if (!m_texture.loadFromFile("ASSETS\\IMAGES\\" + filename + ".png"))
 	{
@@ -13,9 +13,7 @@ Npc::Npc(const sf::Vector2f& pos, const std::string& filename, const std::string
 	m_position = pos;
 	m_velocity = MyVector3{};
 	m_orientation = 0.0;
-	m_speed = 10.0;
 	m_rotation = DegToRadConvert(m_angleInDegrees);
-	//rotateRight(0.0); // get the ship moving
 
 	m_orientation = m_target->orientation();
 	m_velocity = m_target->velocity();
@@ -47,12 +45,15 @@ void Npc::update(sf::Time dt)
 	{
 		if (m_currentState == AIStates::SEEK)
 		{
-			//Seek::seek();
+			m_seek.update(dt);
 		}
+		std::cout << "Length: " << m_velocity.length() << "\n";
+		m_sprite.setRotation(RadToDegConvert(atan2f(m_velocity.y, m_velocity.x)));
 
 		m_position = m_position + m_velocity * dt.asSeconds();
 
 		m_sprite.setPosition(m_position);
+
 
 		m_nameText.setPosition(m_sprite.getPosition().x + m_sprite.getGlobalBounds().width * 0.5,
 			m_sprite.getPosition().y + m_sprite.getGlobalBounds().height * 0.5);
