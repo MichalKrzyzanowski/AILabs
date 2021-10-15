@@ -1,4 +1,20 @@
-﻿  Arrive.cpp
-C:\Users\Micha\Desktop\AILabs\AILab1+2\Utility.h(37,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
-C:\Users\Micha\Desktop\AILabs\AILab1+2\Utility.h(42,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
-  AILab1+2.vcxproj -> C:\Users\Micha\Desktop\AILabs\Debug\AILab1+2.exe
+﻿  Game.cpp
+C:\Users\gameuser\Desktop\AILab1+2\AILab1+2\Utility.h(37,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+C:\Users\gameuser\Desktop\AILab1+2\AILab1+2\Utility.h(42,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+  Npc.cpp
+C:\Users\gameuser\Desktop\AILab1+2\AILab1+2\Utility.h(37,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+C:\Users\gameuser\Desktop\AILab1+2\AILab1+2\Utility.h(42,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+C:\Users\gameuser\Desktop\AILab1+2\AILab1+2\Npc.cpp(24,31): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gameuser\Desktop\AILab1+2\AILab1+2\Npc.cpp(32,95): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gameuser\Desktop\AILab1+2\AILab1+2\Npc.cpp(32,54): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gameuser\Desktop\AILab1+2\AILab1+2\Npc.cpp(39,28): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gameuser\Desktop\AILab1+2\AILab1+2\Npc.cpp(38,50): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gameuser\Desktop\AILab1+2\AILab1+2\Npc.cpp(93,71): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gameuser\Desktop\AILab1+2\AILab1+2\Npc.cpp(93,57): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gameuser\Desktop\AILab1+2\AILab1+2\Npc.cpp(96,29): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gameuser\Desktop\AILab1+2\AILab1+2\Npc.cpp(95,51): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  main.cpp
+C:\Users\gameuser\Desktop\AILab1+2\AILab1+2\Utility.h(37,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+C:\Users\gameuser\Desktop\AILab1+2\AILab1+2\Utility.h(42,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+  Generating Code...
+  AILab1+2.vcxproj -> C:\Users\gameuser\Desktop\AILab1+2\Debug\AILab1+2.exe

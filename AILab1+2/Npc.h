@@ -22,11 +22,12 @@ enum class AIStates
 class Npc
 {
 private:
-	const double m_MAX_SPEED;
-	const double m_MIN_SPEED;
+	double m_maxSpeed;
+	double m_minSpeed;
+	double m_initialMaxSpeed;
 
 	MyVector3 m_position;
-	double m_speed{ m_MIN_SPEED };
+	double m_speed{ m_minSpeed };
 	double m_angleInDegrees{ 70.0 };
 
 	MyVector3 m_velocity{};
@@ -52,7 +53,7 @@ public:
 		const std::string& filename,
 		const std::string& name,
 		Player* target,
-		double maxSpeed = 50.0,
+		double maxSpeed = 100.0,
 		double minSpeed = 10.0);
 
 	void handleEvents(sf::Event e);
@@ -64,8 +65,9 @@ public:
 
 	// getters
 	double speed() { return m_speed; }
-	double maxSpeed() { return m_MAX_SPEED; }
-	double minSpeed() { return m_MIN_SPEED; }
+	double maxSpeed() { return m_maxSpeed; }
+	double initialMaxSpeed() { return m_initialMaxSpeed; }
+	double minSpeed() { return m_minSpeed; }
 	MyVector3& velocity() { return m_velocity; }
 	MyVector3 position() { return m_position; }
 	double orientation() { return m_orientation; }
@@ -74,6 +76,7 @@ public:
 	// setters
 	void setVelocity(MyVector3 vel) { m_velocity = vel; }
 	void setSpeed(double speed) { m_speed = speed; }
+	void setMaxSpeed(double maxSpeed) { m_maxSpeed = maxSpeed; }
 	void setBehaviour(AIStates behaviour) { m_currentState = behaviour; }
 };
 

@@ -19,7 +19,7 @@ Player::Player(const MyVector3& pos)
 	m_sprite.setPosition(m_position);
 
 	m_sprite.setOrigin(m_sprite.getGlobalBounds().width / 2.0, m_sprite.getGlobalBounds().height / 2.0);
-	m_sprite.setScale(0.3, 0.3);
+	m_sprite.setScale(0.5, 0.5);
 }
 
 void Player::handleEvents(sf::Event e)

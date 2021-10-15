@@ -10,9 +10,12 @@ class Wander
 {
 private:
 	Npc* m_npc;
-	const double m_INITIAL_DELAY{ 1.0 };
+	const double m_INITIAL_DELAY{ 2.0 };
+	const double m_OFFSET{ 50.0 };
 	double m_delay{ m_INITIAL_DELAY };
 	MyVector3 m_target{};
+
+	bool m_initialTargetSet{ false };
 
 public:
 	Wander(Npc* npc);

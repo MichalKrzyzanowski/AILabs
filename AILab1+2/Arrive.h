@@ -10,8 +10,9 @@ class Arrive
 {
 private:
 	Npc* m_npc;
-	double m_slowRadius{ 100.0 };
-	double m_arriveRadius{ 20.0 };
+	double m_slowRadius{ 200.0 };
+	double m_arriveRadius{ 100.0 };
+	double m_slowDownSpeed{ 10.0 };
 
 public:
 	Arrive(Npc* npc);

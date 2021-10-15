@@ -39,9 +39,8 @@ private:
 	Player m_ship;
 	Npc m_seekShip;
 	Npc m_wanderShip;
-	//Npc m_slowArriveShip;
+	Npc m_slowArriveShip;
 	Npc m_fastArriveShip;
-	//Npc m_pursueShip;
 	
 
 	bool m_exitGame; // control exiting game
